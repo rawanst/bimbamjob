@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="logo.ico" />
+        <title>Titre de la page</title>
+    </head>
+
+    <header>
+        <img src="logo-name.png" height="50px" sizes="18px" />
+        <h1>TONDEUSE A GAZON AUTOMATIQUE</h1>
+        <style>
+            header{
+                background-color: #1185c7;
+            }
+            h1{
+                color: white;
+                font-weight: bolder;  
+                position: relative; 
+                top: -60px; 
+                left: 500px;
+            }
+        </style>
+    </header>
+
+    <body>
+        <script type="text/javascript">
+
+            //matrice directionnelle selon la position initiale et le sens de rotation
+            const direction = [ ['E','W'],['S','N'],['W','E'] , ['N','S'] ];
+            let x_matrice;
+            let y_matrice;
+
+            /*
+            console.log(direction[0][0]);
+            console.log(direction[3][1]);
+            */
+
+            function changement_direction ( x1, y1, d1 , d ) {
+                console.log(`debut function changement direction`);
+                if(d=='A'){
+                    console.log(`debut function avancer`);
+                    if(d1=='N'){
+                        y1++;
+                        console.log(`function avancerN: ${y1}`);
+                    }
+                    if(d1=='E'){
+                        x1++;
+                        console.log(`function avancerE: ${x1}`);
+                    }
+                    if(d1=='S'){
+                        y1--;
+                    }
+                    if(d1=='W'){
+                        x1--;
+                    }
+
+                    d1 = direction[x1][y1];
+                }
+                else{
+                    switch(d1){
+                        case 'N':
+                            x_matrice = 0;
+                            break;
+                        case 'E':
+                            x_matrice = 1;
+                            break;
+                        case 'S':
+                            x_matrice = 2;
+                            break;
+                        case 'W':
+                            x_matrice = 3;
+                            break;
+                        default:
+                            console.log(`erreur saisie position dans function changement_position`);
+                    }
+
+                    if ( d == 'G'){
+                        y_matrice = 1;
+                    }
+                    else{
+                        y_matrice = 0;
+                    }
+
+                    d1 = direction[x_matrice][y_matrice];
+                    console.log(`function changement_direction: ${d1}`);
+                }
+                
+
+            }
+
+            function avancer ( x1 , y1 , d1 ){
+                console.log(`debut function avancer`);
+                if(d1=='N'){
+                    y1++;
+                    console.log(`function avancerN: ${y1}`);
+                }
+                if(d1=='E'){
+                    x1++;
+                    console.log(`function avancerE: ${x1}`);
+                }
+                if(d1=='S'){
+                    y1--;
+                }
+                if(d1=='W'){
+                    x1--;
+                }
+
+                d1 = direction[x1][y1];
+            }
+            
+
+           
+
+            const surface_a_tondre = prompt("Insérez le nombre de mètres carrée de votre surface à tondre:");
+            const premiere_position = prompt("Où se trouve votre première tondeuse automatique:");
+            const premier_parcours = prompt("Quel parcours voulez-vous qu'elle fasse:");
+            const deuxieme_position = prompt("Où se trouve votre deuxième tondeuse automatique:");
+            const deuxieme_parcours = prompt("Quel parcours voulez-vous qu'elle fasse:");
+
+            /* Test valeurs input 
+            console.log(` ${surface_a_tondre}`);
+            console.log(` ${premiere_position}`);
+            console.log(` ${premier_parcours}`);
+            console.log(` ${deuxieme_position}`);
+            console.log(` ${deuxieme_parcours}`);
+            */
+
+            let [x1 , y1 , d1] = premiere_position;
+            let [x2 , y2 , d2] = deuxieme_position;
+            
+            /* Test décomposition de la const (44 S -> x1=4 y1=4 d1=S)
+            console.log(` ${premiere_position}`);
+            console.log(` x1= ${x1}`);
+            console.log(` y1= ${y1}`);
+            console.log(` d1= ${d1}`);
+            */
+
+            let tableau_premier_parcours = Array.from(premier_parcours);
+            
+            // test décomposition array: console.log(`${tableau_premier_parcours[0]}`);
+            
+            let i=0;
+            let d;
+            for ( i=0 ; i<=tableau_premier_parcours.length ; i++){
+                d=tableau_premier_parcours[i];
+                changement_direction(x1, y1, d1 , d);
+                
+            }
+
+            console.log(`nouvelle position: ${x1,y1,d1}`);
+
+        </script>
+        
+        <style>
+            body{
+                background-color: #1185c7;
+            }
+        </style> 
+    </body>
+
+</html>
